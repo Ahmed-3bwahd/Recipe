@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-12">
+    <form [formGroup]="recipeForm" (ngSubmit)="onsubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success m-1" type="submit" [disabled]="!recipeForm.valid">Save</button>
+          <button class="btn btn-danger m-1" type="button" (click)="oncancel()">Cancle</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              formControlName="name">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="imgPath">Image URL</label>
+            <input
+              type="text"
+              class="form-control"
+              id="imgPath"
+              formControlName="imgpath">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <img [src]="recipeForm.value['imgpath']" class="img-fluid">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              class="form-control"
+              id="description"
+              rows="5"
+              formControlName="description"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12" formArrayName="ingredient">
+          <div
+            class="row mb-2"
+            *ngFor="let ingredclr of getControls(); let i = index"
+            [formGroupName]="i"
+          >
+            <div class="col-sm-7">
+              <input type="text" class="form-control" formControlName="ingredname">
+            </div>
+            <div class="col-sm-3">
+              <input type="number" class="form-control" formControlName="amount">
+            </div>
+            <div class="col-sm-2">
+              <button class="btn btn-danger" (click)="ondeleteingred(i)">X</button>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-5">
+              <button
+                class="btn btn-success mb-3"
+                type="button"
+                (click)="addingred()">Add Ingredient</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
